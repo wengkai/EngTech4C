@@ -1,0 +1,28 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "${file}",
+                "-o", 
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "-g", // 生成和调试有关的信息
+                "-Wall", // 开启额外警告
+                "-fcolor-diagnostics", // 彩色的错误信息？但貌似clang默认开启而gcc不接受此参数
+                "-std=gnu11" // C语言最新标准为c11，或根据自己的需要进行修改
+            ],
+            "group": "build",
+            "presentation": {
+                // Reveal the output only if unrecognized errors occur.
+                "reveal": "silent"
+            },
+            // Use the standard MS compiler pattern to detect errors, warnings and infos
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}
