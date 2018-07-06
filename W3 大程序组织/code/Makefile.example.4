@@ -1,0 +1,16 @@
+CC = gcc
+CFLAG = -MMD
+TARGET = sum
+OBJS = main.o sum.o
+DEPS = $(OBJS:.o=.d)
+
+$(TARGET): $(OBJS)
+	$(CC) -o $@ $^
+
+-include $(DEPS)
+
+.c.o:
+	$(CC) $(CFLAG) -c -o $@ $<
+
+clean:
+	rm $(TARGET) $(OBJS) $(DEPS)

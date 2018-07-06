@@ -1,0 +1,24 @@
+# Makefile to compare sorting routines
+ 
+BASE = /home/blufox/base
+CC           =   gcc
+CFLAGS  =   -O –Wall
+EFILE      =   $(BASE)/bin/compare_sorts
+INCLS     =   -I$(LOC)/include
+LIBS        =   $(LOC)/lib/g_lib.a \
+                     $(LOC)/lib/h_lib.a
+LOC        =   /usr/local
+
+OBJS = main.o    another_qsort.o    chk_order.o \
+             compare.o    quicksort.o
+
+$(EFILE): $(OBJS)
+	@echo “linking …”
+	@$(CC) $(CFLAGS) –o $@ $(OBJS) $(LIBS)
+
+$(OBJS): compare_sorts.h
+	$(CC) $(CFLAGS) $(INCLS) –c $*.c
+
+# Clean intermediate files
+clean:
+	rm *~ $(OBJS)
